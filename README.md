@@ -1,4 +1,4 @@
 Java-Unofficial-Opengl-SDK
 ==========================
 
-Java Unofficial Opengl Software Development Kit
+This is a (simple) java porting of the Unofficial Opengl Software Development Kit (http://glsdk.sourceforge.net/docs/html/index.html)
