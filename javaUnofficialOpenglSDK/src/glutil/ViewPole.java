@@ -4,9 +4,8 @@
  */
 package glutil;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import javax.swing.SwingUtilities;
+import com.jogamp.newt.event.MouseEvent;
+import static glutil.ViewPole.Projection.perspective;
 import jglm.Jglm;
 import jglm.Mat4;
 import jglm.Quat;
@@ -27,14 +26,18 @@ public class ViewPole {
     private Vec2 startDragMouseLoc;
     private float degStartDragSpin;
     private Quat startDragOrient;
+    private float scale;
+    private Projection type;
 
-    public ViewPole(ViewData viewData, ViewScale viewScale) {
+    public ViewPole(ViewData viewData, ViewScale viewScale, Projection type) {
 
         this.currView = viewData;
         this.initialView = viewData;
         this.viewScale = viewScale;
+        this.type = type;
 
         isDragging = false;
+        scale = 1.0f;
     }
 
     public Mat4 calcMatrix() {
@@ -59,7 +62,7 @@ public class ViewPole {
 
         if (!isDragging) {
 
-            if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
+            if (mouseEvent.isButtonDown(MouseEvent.BUTTON1)) {
 
                 Vec2 position = new Vec2(mouseEvent.getX(), mouseEvent.getY());
 
@@ -92,7 +95,7 @@ public class ViewPole {
         isDragging = true;
     }
 
-    public void mouseMove(MouseEvent mouseEvent) {
+    public void mouseMoved(MouseEvent mouseEvent) {
 
         if (isDragging) {
 
@@ -142,7 +145,7 @@ public class ViewPole {
 
         if (isDragging) {
 
-            if (SwingUtilities.isLeftMouseButton(mouseEvent)) {
+            if (mouseEvent.isButtonDown(MouseEvent.BUTTON1)) {
 
                 if (rotatingMode == RotatingMode.DUAL_AXIS || rotatingMode == RotatingMode.BIAXIAL || rotatingMode == RotatingMode.SPIN) {
 
@@ -159,24 +162,52 @@ public class ViewPole {
         isDragging = false;
     }
 
-    public void mouseWheel(MouseWheelEvent mouseWheelEvent) {
+    public void mouseWheelMoved(MouseEvent mouseEvent) {
 
-        if (mouseWheelEvent.isShiftDown()) {
+        if (type == perspective) {
 
-            currView.setRadius(currView.getRadius() + mouseWheelEvent.getWheelRotation() * viewScale.getLargeRadiusDelta());
+            if (mouseEvent.isShiftDown()) {
+//                System.out.println("down " + mouseEvent.getRotation()[1]);
+                currView.setRadius(currView.getRadius() + mouseEvent.getRotation()[0] * viewScale.getLargeRadiusDelta());
 
+            } else {
+//                System.out.println("up");
+                currView.setRadius(currView.getRadius() + mouseEvent.getRotation()[1] * viewScale.getSmallRadiusDelta());
+            }
         } else {
 
-            currView.setRadius(currView.getRadius() + mouseWheelEvent.getWheelRotation() * viewScale.getSmallRadiusDelta());
-        }
+            float factor;
 
-        currView.setRadius(Jglm.clamp(currView.getRadius(), viewScale.getMinRadius(), viewScale.getMaxRadius()));
+            if (mouseEvent.isShiftDown()) {
+
+                factor = mouseEvent.getRotation()[0] / 10;
+
+            } else {
+
+                factor = mouseEvent.getRotation()[1] / 5;
+            }
+            scale = scale + scale * factor;
+
+            scale = Jglm.clamp(scale, 0.01f, 5f);
+
+            System.out.println("scale: " + scale);
+        }
     }
-    
+
+    public float getScale() {
+        return scale;
+    }
+
     public enum RotatingMode {
 
         SPIN,
         BIAXIAL,
         DUAL_AXIS
+    }
+
+    public enum Projection {
+
+        orthographic,
+        perspective;
     }
 }
