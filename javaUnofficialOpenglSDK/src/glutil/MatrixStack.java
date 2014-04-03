@@ -19,6 +19,7 @@ public class MatrixStack {
     private ArrayList<Mat4> matrices;
 
     public MatrixStack() {
+        
         matrices = new ArrayList<>();
 
         matrices.add(new Mat4(1.0f));

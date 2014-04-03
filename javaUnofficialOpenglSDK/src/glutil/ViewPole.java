@@ -198,6 +198,14 @@ public class ViewPole {
         return scale;
     }
 
+    public ViewData getCurrView() {
+        return currView;
+    }
+
+    public void setCurrView(ViewData currView) {
+        this.currView = currView;
+    }
+
     public enum RotatingMode {
 
         SPIN,
