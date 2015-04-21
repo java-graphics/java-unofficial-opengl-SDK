@@ -56,11 +56,11 @@ public class GLSLProgramObject {
     }
 
     public void destroy(GL3 gl3) {
-        for (int i = 0; i < _vertexShaders.size(); i++) {
-            gl3.glDeleteShader(_vertexShaders.get(i));
+        for (Integer _vertexShader : _vertexShaders) {
+            gl3.glDeleteShader(_vertexShader);
         }
-        for (int i = 0; i < _fragmentShaders.size(); i++) {
-            gl3.glDeleteShader(_fragmentShaders.get(i));
+        for (Integer _fragmentShader : _fragmentShaders) {
+            gl3.glDeleteShader(_fragmentShader);
         }
         if (_progId != 0) {
             gl3.glDeleteProgram(_progId);
@@ -267,12 +267,12 @@ public class GLSLProgramObject {
     public final void initializeProgram(GL3 gl3, boolean cleanUp) {
         _progId = gl3.glCreateProgram();
 
-        for (int i = 0; i < _vertexShaders.size(); i++) {
-            gl3.glAttachShader(_progId, _vertexShaders.get(i));
+        for (Integer _vertexShader : _vertexShaders) {
+            gl3.glAttachShader(_progId, _vertexShader);
         }
 
-        for (int i = 0; i < _fragmentShaders.size(); i++) {
-            gl3.glAttachShader(_progId, _fragmentShaders.get(i));
+        for (Integer _fragmentShader : _fragmentShaders) {
+            gl3.glAttachShader(_progId, _fragmentShader);
         }
 
         gl3.glLinkProgram(_progId);
@@ -294,14 +294,14 @@ public class GLSLProgramObject {
         gl3.glValidateProgram(_progId);
 
         if (cleanUp) {
-            for (int i = 0; i < _vertexShaders.size(); i++) {
-                gl3.glDetachShader(_progId, _vertexShaders.get(i));
-                gl3.glDeleteShader(_vertexShaders.get(i));
+            for (Integer _vertexShader : _vertexShaders) {
+                gl3.glDetachShader(_progId, _vertexShader);
+                gl3.glDeleteShader(_vertexShader);
             }
 
-            for (int i = 0; i < _fragmentShaders.size(); i++) {
-                gl3.glDetachShader(_progId, _fragmentShaders.get(i));
-                gl3.glDeleteShader(_fragmentShaders.get(i));
+            for (Integer _fragmentShader : _fragmentShaders) {
+                gl3.glDetachShader(_progId, _fragmentShader);
+                gl3.glDeleteShader(_fragmentShader);
             }
         }
     }
