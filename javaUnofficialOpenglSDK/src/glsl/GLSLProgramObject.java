@@ -25,6 +25,7 @@ public class GLSLProgramObject {
     protected ArrayList<Integer> _vertexShaders = new ArrayList<>();
     protected ArrayList<Integer> _fragmentShaders = new ArrayList<>();
     private Integer _progId;
+    public static int invalidUL = -1;
 //    private String shadersPath = "/shaders/";
 
     public GLSLProgramObject(GL3 gl3) {
