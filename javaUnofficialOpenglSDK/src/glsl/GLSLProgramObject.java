@@ -20,13 +20,10 @@ import java.util.ArrayList;
 
 public class GLSLProgramObject {
 
-//    protected Vector<Integer> _vertexShaders = new Vector<>();
-//    protected Vector<Integer> _fragmentShaders = new Vector<>();
     protected ArrayList<Integer> _vertexShaders = new ArrayList<>();
     protected ArrayList<Integer> _fragmentShaders = new ArrayList<>();
     private Integer _progId;
     public static int invalidUL = -1;
-//    private String shadersPath = "/shaders/";
 
     public GLSLProgramObject(GL3 gl3) {
         _progId = 0;
@@ -230,7 +227,6 @@ public class GLSLProgramObject {
                 }
             }
 
-
             int iID = gl3.glCreateShader(GL3.GL_FRAGMENT_SHADER);
 
             String[] akProgramText = new String[1];
@@ -310,4 +306,4 @@ public class GLSLProgramObject {
     public Integer getProgramId() {
         return _progId;
     }
-};
+}
