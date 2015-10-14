@@ -9,7 +9,7 @@ package glsl;
 //
 // Copyright (c) NVIDIA Corporation. All rights reserved.
 ////////////////////////////////////////////////////////////////////////////////
-import javax.media.opengl.GL3;
+import com.jogamp.opengl.GL3;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
