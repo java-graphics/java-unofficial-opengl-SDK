@@ -21,8 +21,18 @@ public class MatrixStack_ {
         matrices.add(new Mat4(1.0f));
     }
 
+    public MatrixStack_ translate(float x, float y, float z) {
+        top().translate(x, y, z);
+        return this;
+    }
+
     public MatrixStack_ translate(Vec3 offset) {
         top().translate(offset);
+        return this;
+    }
+
+    public MatrixStack_ scale(float x, float y, float z) {
+        top().scale(x, y, z);
         return this;
     }
 
