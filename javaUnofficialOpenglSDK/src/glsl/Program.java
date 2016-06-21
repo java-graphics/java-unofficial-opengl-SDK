@@ -29,13 +29,11 @@ public class Program {
         ShaderProgram shaderProgram = new ShaderProgram();
 
         shaderProgram.add(vertShader);
-
         shaderProgram.add(fragShader);
 
         shaderProgram.link(gl3, System.out);
 
         vertShader.destroy(gl3);
-
         fragShader.destroy(gl3);
 
         name = shaderProgram.program();
