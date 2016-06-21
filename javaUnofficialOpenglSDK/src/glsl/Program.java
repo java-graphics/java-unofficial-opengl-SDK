@@ -19,12 +19,35 @@ public class Program {
 
     public int name;
 
+    public Program(GL3 gl3, String shadersRoot, String shadersSrc) {
+        this(gl3, shadersRoot, shadersSrc, shadersSrc);
+    }
+
     public Program(GL3 gl3, String shadersRoot, String vertSrc, String fragSrc) {
+        this(gl3, shadersRoot, vertSrc, fragSrc, null, null, null, null);
+    }
+
+    public Program(
+            GL3 gl3,
+            String shadersRoot,
+            String vertSrc,
+            String fragSrc,
+            String replaceVertOld,
+            String replaceVertNew,
+            String replaceFragOld,
+            String replaceFragNew) {
 
         ShaderCode vertShader = ShaderCode.create(gl3, GL_VERTEX_SHADER, this.getClass(), shadersRoot, null, vertSrc,
                 "vert", null, true);
         ShaderCode fragShader = ShaderCode.create(gl3, GL_FRAGMENT_SHADER, this.getClass(), shadersRoot, null, fragSrc,
                 "frag", null, true);
+
+        if (replaceVertOld != null) {
+            vertShader.replaceInShaderSource(replaceVertOld, replaceVertNew);
+        }
+        if (replaceFragOld != null) {
+            fragShader.replaceInShaderSource(replaceFragOld, replaceFragNew);
+        }
 
         ShaderProgram shaderProgram = new ShaderProgram();
 
@@ -38,4 +61,5 @@ public class Program {
 
         name = shaderProgram.program();
     }
+
 }
