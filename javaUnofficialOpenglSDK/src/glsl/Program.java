@@ -30,6 +30,18 @@ public class Program {
     public Program(
             GL3 gl3,
             String shadersRoot,
+            String shadersSrc,
+            String replaceVertOld,
+            String replaceVertNew,
+            String replaceFragOld,
+            String replaceFragNew) {
+
+        this(gl3, shadersRoot, shadersSrc, shadersSrc, replaceVertOld, replaceVertNew, replaceFragOld, replaceFragNew);
+    }
+
+    public Program(
+            GL3 gl3,
+            String shadersRoot,
             String vertSrc,
             String fragSrc,
             String replaceVertOld,
