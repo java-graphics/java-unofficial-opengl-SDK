@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package glutil;
+package view;
 
-import jglm.Quat;
-import jglm.Vec3;
+import glm.quat.Quat;
+import glm.vec._3.Vec3;
 
 /**
  *
@@ -22,15 +22,15 @@ public class ObjectData {
         this.orientation = orientation;
     }
 
-    public Vec3 getPosition() {
+    public Vec3 position() {
         return position;
     }
 
-    public Quat getOrientation() {
+    public Quat orientation() {
         return orientation;
     }
 
-    public void setOrientation(Quat orientation) {
+    public void orientation(Quat orientation) {
         this.orientation = orientation;
     }
 }
