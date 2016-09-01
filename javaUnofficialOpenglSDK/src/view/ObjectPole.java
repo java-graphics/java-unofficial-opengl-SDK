@@ -195,8 +195,7 @@ public class ObjectPole {
 
             switch (rotateMode) {
 
-                case RotateMode.DUAL_AXIS:
-                    System.out.println("rotateScale " + rotateScale);
+                case RotateMode.DUAL_AXIS:                    
                     Quat rot = calcRotationQuat(Axis.Y, diff.x * rotateScale);
                     rot = calcRotationQuat(Axis.X, diff.y * rotateScale).mul(rot).normalize();
                     rotateViewDegrees(rot);
