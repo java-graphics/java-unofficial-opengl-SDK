@@ -56,7 +56,7 @@ public class MatrixStack {
         return this;
     }
 
-    public MatrixStack applyMat(Mat4 mat4) {
+    public MatrixStack applyMatrix(Mat4 mat4) {
         top().mul(mat4);
         return this;
     }
