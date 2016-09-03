@@ -83,7 +83,8 @@ public class MatrixStack {
         return this;
     }
 
-    public void perspective(float defFOV, float aspectRatio, float zNear, float zFar) {
+    public MatrixStack perspective(float defFOV, float aspectRatio, float zNear, float zFar) {
         top().mulPerspective(defFOV, aspectRatio, zNear, zFar);
+        return this;
     }
 }
