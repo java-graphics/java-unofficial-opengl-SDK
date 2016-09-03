@@ -6,6 +6,7 @@ package glutil;
 
 import glm.mat._4.Mat4;
 import glm.vec._3.Vec3;
+import glm.vec._4.Vec4;
 import java.util.ArrayList;
 
 /**
@@ -21,23 +22,25 @@ public class MatrixStack {
         matrices.add(new Mat4(1.0f));
     }
 
+    public MatrixStack translate(Vec4 offset) {
+        return translate(offset.x, offset.y, offset.z);
+    }
+
+    public MatrixStack translate(Vec3 offset) {
+        return translate(offset.x, offset.y, offset.z);
+    }
+
     public MatrixStack translate(float x, float y, float z) {
         top().translate(x, y, z);
         return this;
     }
 
-    public MatrixStack translate(Vec3 offset) {
-        top().translate(offset);
-        return this;
+    public MatrixStack scale(Vec3 scaling) {
+        return scale(scaling.x, scaling.y, scaling.z);
     }
 
     public MatrixStack scale(float x, float y, float z) {
         top().scale(x, y, z);
-        return this;
-    }
-
-    public MatrixStack scale(Vec3 scaling) {
-        top().scale(scaling);
         return this;
     }
 
@@ -79,7 +82,7 @@ public class MatrixStack {
         matrices.set(matrices.size() - 1, mat4);
         return this;
     }
-    
+
     public void perspective(float defFOV, float aspectRatio, float zNear, float zFar) {
         top().mulPerspective(defFOV, aspectRatio, zNear, zFar);
     }
