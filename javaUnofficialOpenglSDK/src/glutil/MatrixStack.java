@@ -30,6 +30,10 @@ public class MatrixStack {
         return translate(offset.x, offset.y, offset.z);
     }
 
+    public MatrixStack translate(float offset) {
+        return translate(offset, offset, offset);
+    }
+
     public MatrixStack translate(Vec3 offset) {
         return translate(offset.x, offset.y, offset.z);
     }
@@ -37,6 +41,10 @@ public class MatrixStack {
     public MatrixStack translate(float x, float y, float z) {
         top().translate(x, y, z);
         return this;
+    }
+
+    public MatrixStack scale(float scaling) {
+        return scale(scaling, scaling, scaling);
     }
 
     public MatrixStack scale(Vec3 scaling) {

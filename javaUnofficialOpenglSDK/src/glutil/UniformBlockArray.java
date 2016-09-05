@@ -38,10 +38,11 @@ public class UniformBlockArray {
         BufferUtils.destroyDirectBuffer(uniformBufferAlignSize);
     }
 
-    public void createBufferObject(GL3 gl3) {
+    public int createBufferObject(GL3 gl3) {
         gl3.glGenBuffers(1, bufferName);
         gl3.glBindBuffer(GL_UNIFORM_BUFFER, bufferName.get(0));
         gl3.glBufferData(GL_UNIFORM_BUFFER, storage.capacity(), storage, GL_STATIC_DRAW);
         gl3.glBindBuffer(GL_UNIFORM_BUFFER, 0);
+        return bufferName.get(0);
     }
 }
