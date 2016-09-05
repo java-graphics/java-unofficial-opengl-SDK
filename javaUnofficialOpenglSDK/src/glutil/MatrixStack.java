@@ -18,8 +18,12 @@ public class MatrixStack {
     private ArrayList<Mat4> matrices;
 
     public MatrixStack() {
+        this(new Mat4(1.0f));
+    }
+
+    public MatrixStack(Mat4 mat) {
         matrices = new ArrayList<>();
-        matrices.add(new Mat4(1.0f));
+        matrices.add(mat);
     }
 
     public MatrixStack translate(Vec4 offset) {
