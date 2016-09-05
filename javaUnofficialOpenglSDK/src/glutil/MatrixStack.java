@@ -26,6 +26,11 @@ public class MatrixStack {
         matrices.add(mat);
     }
 
+    public MatrixStack identity() {
+        top().identity();
+        return this;
+    }
+
     public MatrixStack translate(Vec4 offset) {
         return translate(offset.x, offset.y, offset.z);
     }
@@ -53,6 +58,11 @@ public class MatrixStack {
 
     public MatrixStack scale(float x, float y, float z) {
         top().scale(x, y, z);
+        return this;
+    }
+
+    public MatrixStack rotate(Vec3 axis, float angDegCCW) {
+        top().rotate((float) Math.toRadians(angDegCCW), axis);
         return this;
     }
 
