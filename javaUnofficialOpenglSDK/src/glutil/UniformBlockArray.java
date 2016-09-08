@@ -45,4 +45,9 @@ public class UniformBlockArray {
         gl3.glBindBuffer(GL_UNIFORM_BUFFER, 0);
         return bufferName.get(0);
     }
+
+    public void dispose() {
+        BufferUtils.destroyDirectBuffer(storage);
+        BufferUtils.destroyDirectBuffer(bufferName);
+    }
 }
