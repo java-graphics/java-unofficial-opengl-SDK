@@ -106,7 +106,13 @@ public class MatrixStack {
     }
 
     public MatrixStack perspective(float defFOV, float aspectRatio, float zNear, float zFar) {
-        top().mulPerspective(defFOV, aspectRatio, zNear, zFar);
+        top().mulPerspective((float) Math.toRadians(defFOV), aspectRatio, zNear, zFar);
+        return this;
+    }
+    
+    
+    public MatrixStack resetStack() {
+        matrices.get(matrices.size() - 1).set(matrices.get(matrices.size() - 2));
         return this;
     }
 }
